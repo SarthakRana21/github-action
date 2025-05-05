@@ -23,7 +23,10 @@ jobs:
       - name: Deploy using SSH pass
         run: |
           sshpass -p "${{ secrets.DROPLETPASS }}" ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.DROPLETIP }} << EOF
-            cd /app || git clone https://github.com/SarthakRana21/github-action.git /app && cd /app
+            if [ ! -d /app/.git ]; then
+              git clone https://github.com/SarthakRana21/github-action.git /app
+            fi
+            cd /app || exit
             git pull origin main
             npm install
           EOF
