@@ -23,10 +23,9 @@ jobs:
       - name: Deploy using SSH pass
         run: | 
          sshpass -p "${{ secrets.DROPLETPASS }}" ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.DROPLETIP }} << EOF
-            cd /app
-            git pull origin main
-            npm install
-            npm run dev
+          cd /app || git clone https://github.com/SarthakRana21/github-action.git /app && cd /app
+          git pull origin main
+          npm install
           EOF
       
       
