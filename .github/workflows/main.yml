@@ -21,7 +21,7 @@ jobs:
         
       - name: Deploy using SSH pass
         run: | 
-         sshpass -p "${{ secrets.dropletPass }}" ssh -o StrictHostKeyChecking=no ${{ secrets.dropletUser }}@your.droplet.ip << 'EOF'
+         sshpass -p "${{ secrets.dropletPass }}" ssh -o StrictHostKeyChecking=no ${{ secrets.dropletUser }} << 'EOF'
             cd /app
             git pull origin main
             npm install
